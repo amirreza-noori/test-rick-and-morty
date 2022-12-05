@@ -24,6 +24,7 @@ interface Props {
 
 const drawerWidth = 240;
 const navItems = [
+    { title: 'Home', path: '' },
     { title: 'Characters', path: 'characters' },
     { title: 'Locations', path: 'locations' },
     { title: 'Episodes', path: 'episodes' },
@@ -71,21 +72,21 @@ export default function Header(props: Props) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{ mr: 2, display: { md: 'none' } }}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}
+                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
                     >
                         <svg width="40" height="40" viewBox="0 0 50 50" fill="white" style={{ marginRight: 10 }}>{logo}</svg>
                         The Rick and Morty
                     </Typography>
 
 
-                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                         {navItems.map((item) => (
                             <Button key={item.path} sx={{ color: '#fff' }} component={NavLink} to={item.path}>
                                 {item.title}
@@ -104,7 +105,7 @@ export default function Header(props: Props) {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
+                        display: { xs: 'block', md: 'none' },
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                 >

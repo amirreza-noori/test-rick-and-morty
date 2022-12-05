@@ -1,11 +1,10 @@
-import { Card, CardContent, CardMedia, Typography, CircularProgress, Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { OndemandVideo } from '@mui/icons-material';
-import { useQuery, gql } from "@apollo/client";
-import { NavLink, useParams } from "react-router-dom";
+import { gql } from "@apollo/client";
+import ItemPage from '../layouts/ItemPage';
 
 const GET_CHARACTER_QUERY = gql`
-  query GetCharacter($characterId: ID!) {
-    character(id: $characterId) {
+  query GetCharacter($id: ID!) {
+    character(id: $id) {
       id
       name
       status
@@ -30,63 +29,34 @@ const GET_CHARACTER_QUERY = gql`
 `;
 
 export default function Character() {
-  const { characterId } = useParams();
-
-  const { data, loading, error } = useQuery(GET_CHARACTER_QUERY, {
-    variables: { characterId },
-  });
-
-  if (error) return <pre>{error.message}</pre>;
-  if (loading) return (
-    <Box sx={{ display: 'flex', padding: 20, justifyContent: "center" }}>
-      <CircularProgress />
-    </Box>
-  );
-
-  const character = data.character;
 
 
   return (
-    <>
-      <Card sx={{ margin: "auto" }}>
-        <CardMedia
-          component="img"
-          image={character.image}
-          alt={character.name}
-          sx={{ float: "right", width: { sm: "auto" }, marginBottom: 2, margin: { sm: 2 }, borderRadius: { sm: 2 } }}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {character.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Species: {character.species}<br />
-            Gender: {character.gender}<br />
-            Status: {character.status}<br />
-            Location: {character.location.name}<br />
-            Origin: {character.origin.name}<br />
-            Status: {character.status}<br />
-            Status: {character.status}<br />
+    <ItemPage query={GET_CHARACTER_QUERY}
 
-          </Typography>
-          <List>
-            {character.episode.map((episode: any) => <ListItem key={episode.episode}
-              component={NavLink}
-              to={'../episodes/' + character.id}>
-              <ListItemIcon>
-                <OndemandVideo />
-              </ListItemIcon>
-              <ListItemText
+      map={({ character }: any) => ({
 
-                primary={<><b>{episode.episode}</b> {episode.name}</>}
-                secondary={episode.air_date}
-              />
-            </ListItem>
-            )}
-          </List>
-        </CardContent>
-      </Card>
+        name: character.name,
+        image: character.image,
+        props: {
+          Species: character.species,
+          Gender: character.gender,
+          Status: character.status,
+          Location: character.location.name,
+          Origin: character.origin.name,
+        },
+        lists: [{
+          title: "Episode with this character",
+          items: character.episode.map((episode: any) => ({
+            id: character.id,
+            title: <><b>{episode.episode}</b> {episode.name}</>,
+            subtitle: episode.air_date,
+            icon: <OndemandVideo />,
+            path: '../episodes/' + character.id
+          }))
+        }]
 
-    </>
+      })} />
+
   );
 }
