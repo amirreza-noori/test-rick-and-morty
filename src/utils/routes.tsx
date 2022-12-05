@@ -12,39 +12,39 @@ import Home from "../pages/Home";
 
 const routes = [
     {
-        path: "",
+        path: "/",
         element: <Home />,
         exact: true
     },
     {
-        path: "characters",
+        path: "/characters",
         element: <Characters />,
         exact: true
     },
     {
-        path: "characters/:id",
+        path: "/characters/:id",
         element: <Character />,
         exact: true
     },
 
     {
-        path: "locations",
+        path: "/locations",
         element: <Locations />,
         exact: true
     },
     {
-        path: "locations/:id",
+        path: "/locations/:id",
         element: <Location />,
         exact: true
     },
 
     {
-        path: "episodes",
+        path: "/episodes",
         element: <Episodes />,
         exact: true
     },
     {
-        path: "episodes/:id",
+        path: "/episodes/:id",
         element: <Episode />,
         exact: true
     },

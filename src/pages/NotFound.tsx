@@ -9,7 +9,7 @@ export default function NotFound() {
 
   return (
     <>
-      {params['*'] !== 'notfound' && <Navigate to={process.env.PUBLIC_URL + "/notfound"} />};
+      {params['*'] !== 'notfound' && <Navigate to={"/notfound"} />}
 
       <Box sx={{ display: 'flex', justifyContent: "center", alignItems: "center", padding: 10, paddingBottom: 2 }}>
         <CrisisAlert sx={{ fontSize: 100, margin: 4 }} />

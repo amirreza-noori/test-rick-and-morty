@@ -25,9 +25,9 @@ interface Props {
 const drawerWidth = 240;
 const navItems = [
     { title: 'Home', path: '' },
-    { title: 'Characters', path: 'characters' },
-    { title: 'Locations', path: 'locations' },
-    { title: 'Episodes', path: 'episodes' },
+    { title: 'Characters', path: '/characters' },
+    { title: 'Locations', path: '/locations' },
+    { title: 'Episodes', path: '/episodes' },
 ];
 
 export default function Header(props: Props) {
